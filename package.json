@@ -1,0 +1,15 @@
+{
+  "name": "com.freya.mathfs",
+  "version": "0.0.1",
+  "displayName": "Mathfs",
+  "description": "Expanded Math Functionality for Unity",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "keywords": [
+    "math"
+  ],
+  "author": {
+    "name": "Freya Holmer",
+    "url": "https://github.com/FreyaHolmer/Mathfs"
+  }
+}
