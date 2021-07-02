@@ -100,7 +100,10 @@ namespace Freya {
 		public static int Max( params int[] values ) => values.Max();
 
 		// Rounding
-		public static float Sign( float value ) => value >= 0f ? 1f : -1f;
+		public static int Sign( float value ) => value >= 0f ? 1 : -1;
+		public static int Sign( int value ) => value >= 0 ? 1 : -1;
+		public static int SignWithZero( int value ) => value == 0 ? 0 : Sign( value );
+		public static int SignWithZero( float value, float epsilon = 0.000001f ) => Abs( value ) < epsilon ? 0 : Sign( value );
 		public static float Floor( float value ) => (float)Math.Floor( value );
 		public static Vector2 Floor( Vector2 value ) => new Vector2( (float)Math.Floor( value.x ), (float)Math.Floor( value.y ) );
 		public static Vector3 Floor( Vector3 value ) => new Vector3( (float)Math.Floor( value.x ), (float)Math.Floor( value.y ), (float)Math.Floor( value.z ) );
@@ -292,26 +295,6 @@ namespace Freya {
 		public static float SmoothDampAngle( float current, float target, ref float currentVelocity, float smoothTime, [Uei.DefaultValue( "Mathf.Infinity" )] float maxSpeed, [Uei.DefaultValue( "Time.deltaTime" )] float deltaTime ) {
 			target = current + DeltaAngle( current, target );
 			return SmoothDamp( current, target, ref currentVelocity, smoothTime, maxSpeed, deltaTime );
-		}
-
-
-		public static class Polygon {
-
-			public static bool IsClockwise( IReadOnlyList<Vector2> pts ) => SignedArea( pts ) > 0;
-			public static float Area( IReadOnlyList<Vector2> pts ) => Mathf.Abs( SignedArea( pts ) );
-
-			public static float SignedArea( IReadOnlyList<Vector2> pts ) {
-				int count = pts.Count;
-				float sum = 0f;
-				for( int i = 0; i < count; i++ ) {
-					Vector2 a = pts[i];
-					Vector2 b = pts[( i + 1 ) % count];
-					sum += ( b.x - a.x ) * ( ( b.y + a.y ) * 0.5f );
-				}
-
-				return sum;
-			}
-
 		}
 
 		// Root Finding
